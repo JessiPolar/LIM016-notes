@@ -1,17 +1,18 @@
-import { createContext, useEffect, useState, useContext } from 'react';
+import { createContext, useEffect, useState, useContext } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../firebase/firebaseConfig';
+import { auth } from "../firebase/firebaseConfig";
 
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState("");
   function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth,email, password);
+    console.log(email,password)
+    return createUserWithEmailAndPassword(auth, email, password);
   }
   function logIn(email, password) {
-    console.log('Email', email)
-    return signInWithEmailAndPassword(auth,email, password);
+    console.log("Email", email);
+    return signInWithEmailAndPassword(auth, email, password);
   }
   function logOut() {
     return signOut(auth);
@@ -31,7 +32,7 @@ export function UserAuthContextProvider({ children }) {
   }, []);
   return (
     <userAuthContext.Provider value={{ user, signUp, logIn, logOut, googleSignIn }}>
-       {children}
+      {children}
     </userAuthContext.Provider>
   );
 }
@@ -39,3 +40,5 @@ export function UserAuthContextProvider({ children }) {
 export function useUserAuth() {
   return useContext(userAuthContext);
 }
+
+

@@ -4,22 +4,29 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:react/recommended',
-    'airbnb',
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb",
   ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
   plugins: [
-    'react',
+    "react",
   ],
   rules: {
-    'avoidEscape': true,
+    "quotes": ["error", "double"],
+    /* 'jsx-quotes': [2, 'prefer-doble'], */
+    /* 'files.eol': '\n', */
+     'avoidEscape': true, 
     /* 'jsx-quotes': [2, 'prefer-single'], */
     /* 'quotes': [2, 'single', { 'avoidEscape': true, 'allowTemplateLiterals': true }] */
+    'react/prop-types': 'off',
+    'linebreak-style': ['error', 'windows'],
+
   },
 };

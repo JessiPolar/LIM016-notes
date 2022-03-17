@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Form, Button, Alert } from 'react-bootstrap';
-import GoogleButton from 'react-google-button';
-import { useUserAuth } from '../context/UserAuthContext';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Form, Button, Alert } from "react-bootstrap";
+import GoogleButton from "react-google-button";
+import { useUserAuth } from "../context/UserAuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -30,6 +30,7 @@ const Login = () => {
       setError(err.message);
     }
   };
+  
   return (
     <>
       <div className="p-4 box">
@@ -59,7 +60,7 @@ const Login = () => {
         </Form>
         <hr />
         <div>
-          <GoogleButton className="g-btn" type="dark" onclick={handleGoogleSignIn} />
+          <GoogleButton className="g-btn" type="dark" onClick={handleGoogleSignIn} />
         </div>
       </div>
       <div className="p-4 box mt-3 text-center">
@@ -72,6 +73,7 @@ const Login = () => {
 export default Login;
 
 /*
+{{error && <Alert variant="danger">{error}</Alert>}}
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, update } from 'firebase/database';

@@ -1,31 +1,54 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Form, Button, Alert } from 'react-bootstrap';
-import { useUserAuth } from '../context/UserAuthContext';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Form, Button, Alert } from "react-bootstrap";
+import { useUserAuth } from "../context/UserAuthContext";
+import { set, ref } from "firebase/database";
+import { database } from "../firebase/firebaseConfig";
 
 const Signup = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { signUp } = useUserAuth();
   const navigate = useNavigate();
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
+      /* await signUp(email, password); */
+      signUp(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        set(ref(database, `'users/' ${user.uid}`), {
+          username: username,
+          email: email
+        });
+      })
       navigate("/");
     } catch (err) {
+      console.log(err)
+      console.log(err.code)
+      console.log(err.message)
       setError(err.message);
     }
-  };
+  }; 
   return (
     <>
       <div className="p-4 box">
         <h2 className="mb-3">Firebase auth Signup</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicUsername">
+            <Form.Control 
+              type="text" 
+              placeholder="Username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Form.Group> 
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control 
               type="email" 
@@ -44,7 +67,7 @@ const Signup = () => {
 
           <div className="d-grip gap-2">
             <Button variant="primary" type="Submit">
-              Sign In
+              Sign Up
             </Button>
           </div>
         </Form>
@@ -57,7 +80,6 @@ const Signup = () => {
 };
 
 export default Signup;
-
 
 /*
 import React from 'react';

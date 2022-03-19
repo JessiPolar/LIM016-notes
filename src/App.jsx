@@ -6,10 +6,11 @@ import Signup from "./components/Signup";
 import Home from "./components/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   return (
-    <Container>
+    <Container className = "app">
       <Row>
         <Col>
           <UserAuthContextProvider>
@@ -29,6 +30,7 @@ function App() {
         </Col>
       </Row>
     </Container>
+    
 
   );
 }

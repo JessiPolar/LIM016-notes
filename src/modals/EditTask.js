@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-// const useState = React.useState;
 
-const CreateList = ({modal, toggle, save}) => {
+const EditList = ({modal, toggle, updateList, listObj}) => {
     const [listName, setListName] = useState('');
     const [description, setDescription] = useState('');
 
@@ -18,18 +17,32 @@ const CreateList = ({modal, toggle, save}) => {
         }
     }
 
-    const handleSave = (e) => {
+    useEffect(() => {
+        setListName(listObj.Name)
+        setDescription(listObj.Description)
+    }, [])
+    
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        let tempObj = {}
+        tempObj['Name'] = listName
+        tempObj['Description'] = description
+        updateList(tempObj)
+    } 
+    
+ 
+    /* const handleUpdate = (e) => {
         e.preventDefault();
         let listObj = {}
         listObj["Name"] = listName
         listObj["Description"] = description
-        save(listObj)
-    }
+        updateList(listObj)
+    } */
 
 
     return (
         <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}>Create Note</ModalHeader>
+            <ModalHeader toggle={toggle}>Update Note</ModalHeader>
             <ModalBody>
                 
                     <div className="form-group">
@@ -46,11 +59,11 @@ const CreateList = ({modal, toggle, save}) => {
                 
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" onClick={handleSave} >Create</Button> {' '}
+                <Button color="primary" onClick={handleUpdate} >Update</Button> {' '}
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </ModalFooter>
         </Modal>
     );
 };
 
-export default CreateList;
+export default EditList;

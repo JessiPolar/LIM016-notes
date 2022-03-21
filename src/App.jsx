@@ -6,11 +6,13 @@ import Signup from "./components/Signup";
 import Home from "./components/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import firebase from './firebase/firebaseConfig';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
-    <Container className = "app">
+    <Container className = "App">
       <Row>
         <Col>
           <UserAuthContextProvider>

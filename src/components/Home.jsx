@@ -1,10 +1,41 @@
 
-import React, {useState} from 'react';
-import CreateList from '../modals/createList';
+import React, {useState, useEffect} from 'react';
+import CreateList from '../modals/createList.js';
+import Note from './Note.js'
 
 const Lista = () => {
   const [modal, setModal] = useState(false);
   const [noteList, setNoteList] = useState([])
+
+  useEffect(() => {
+    let arr = localStorage.getItem("notelist")
+     
+    if(arr){
+      let obj = JSON.parse(arr)
+      setNoteList(obj)
+    } 
+  }, [])
+
+  const deleteList = (index) => {
+    let tempList = noteList
+    tempList.splice(index, 1)
+    localStorage.setItem("noteList", JSON.stringify(tempList))
+    setNoteList(tempList)
+    window.location.reload() 
+    
+    
+
+  }
+
+  const updateListArray = (obj, index) => {
+    let tempList = noteList
+    tempList[index] = obj
+    localStorage.setItem("noteList", JSON.stringify(tempList))
+    setNoteList(tempList)
+    window.location.reload() 
+     
+
+  }
 
   const toggle = () => {
     setModal(!modal);
@@ -13,8 +44,9 @@ const Lista = () => {
   const saveList = (listObj) => {
     let tempList = noteList
     tempList.push(listObj)
-    setModal(false)
+    localStorage.setItem("noteList", JSON.stringify(tempList))
     setNoteList(noteList)
+    setModal(false)
   }
 
     return (
@@ -24,7 +56,7 @@ const Lista = () => {
             <button className = "btn btn-primary mt-2" onClick={() => setModal(true)}>Create List</button>
         </div>
         <div className = "task-container">
-          {noteList.map((obj) => <li>{obj.Name}</li>)}
+          {noteList && noteList.map((obj, index) => <Note listObj = {obj} index = {index} deleteList = {deleteList} updateListArray = {updateListArray}/>)}
         </div>
         <CreateList toggle = {toggle} modal = {modal} save = {saveList}/>
       </>

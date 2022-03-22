@@ -44,10 +44,10 @@ const Note = ({listObj, index, deleteList, updateListArray}) => {
 
     return (
         <div className = "card-wrapper mr-5">
-            <div className = "card-top" style={{"background-color": colors[index%5].primaryColor}}></div>
+            <div className = "card-top" style={{"backgroundColor": colors[index%5].primaryColor}}></div>
             <div className = "task-holder">
-                <span className = "card-header" style = {{ "background-color": colors[index%5].secondaryColor, "border-radius": "10px" }}>{listObj.Name}</span> 
-                <p className = "mt-3" >{listObj.Description}</p>
+                <span className = "card-header" style = {{ "backgroundColor": colors[index%5].secondaryColor, "borderRadius": "10px" }}>{listObj.name}</span> 
+                <p className = "mt-3" >{listObj.description}</p>
 
                 <div style={{"position": "absolute", "right" : "20px", "bottom" : "20px"}}>
                     <i className = "far fa-edit mr-3" style = {{"color" : colors[index%5].primaryColor, "cursor" : "pointer"}} onClick = {() => setModal(true)}></i>

@@ -6,7 +6,6 @@ import Signup from "./components/Signup";
 import Home from "./components/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
-// import firebase from './firebase/firebaseConfig';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 

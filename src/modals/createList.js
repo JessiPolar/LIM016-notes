@@ -3,28 +3,49 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 // const useState = React.useState;
 
-const CreateList = ({modal, toggle, save}) => {
-    const [listName, setListName] = useState('');
-    const [description, setDescription] = useState('');
+const CreateList = ({addOrEditLink, modal, toggle, save} ) => {
+    
 
+    const state = {
+        name: '',
+        description: '',
+      };
+    const [listName, setListName] = useState(state);
+    const [description, setDescription] = useState(state); 
+
+    
     const handleChange = (e) => {
        
-        const {name, value} = e.target
+        const {name, value} = e.target;
+        /* const {description, value} = e.target; */
+        setListName({...listName, [name]: value})
+        //setDescription({...description,[name]: value})
+        console.log(name, value);
 
-        if (name === "listName") {
+        /* if (name === "listName") {
             setListName(value)
         }else{
             setDescription(value)
-        }
+        } */
     }
 
-    const handleSave = (e) => {
+    
+    
+    const handleSubmit = (e) => {
+        console.log('handleSubmit');
+        e.preventDefault();
+        
+        addOrEditLink(listName);
+    }
+
+    /* const handleSave = (e) => {
         e.preventDefault();
         let listObj = {}
         listObj["Name"] = listName
         listObj["Description"] = description
         save(listObj)
-    }
+        console.log(listName);
+    } */
 
 
     return (
@@ -33,20 +54,20 @@ const CreateList = ({modal, toggle, save}) => {
             <ModalBody>
                 
                     <div className="form-group">
-                        <label>List Name</label>
-                        <input type="text" className = "form-control" value = {listName} 
-                        onChange = {handleChange} name = "listName"/>
+                        <label>Title</label>
+                        <input type="text" className = "form-control"  /* value = {listName} */  
+                        onChange = {handleChange} name = "name"/>
                     </div>
                     <div className="form-group">
                         <label>Description</label>
-                        <textarea rows = "5" className = "form-control" value = {description} 
+                        <textarea rows = "5" className = "form-control"  /* value = {description} */  
                         onChange = {handleChange} name = "description"></textarea>
                     </div>
 
                 
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" onClick={handleSave} >Create</Button> {' '}
+                <Button color="primary" onClick={handleSubmit} >Create</Button> {' '}
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </ModalFooter>
         </Modal>

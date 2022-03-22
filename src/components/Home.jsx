@@ -79,7 +79,7 @@ const Lista = () => {
             <button className = "btn btn-primary mt-2" onClick={() => setModal(true)}>Create List</button>
         </div>
         <div className = "task-container">
-          {noteList && noteList.map((obj, index) => <Note key = {obj.id} listObj = {obj} index = {index} deleteList = {deleteList} updateListArray = {updateListArray}/>)}
+          {noteList && noteList.map((obj, index) => <Note key = {obj.id} id = {obj.id} listObj = {obj} index = {index} deleteList = {deleteList} updateListArray = {updateListArray}/>)}
         </div>
         <CreateList toggle = {toggle} modal = {modal} save = {saveList}  addOrEditLink = {addOrEditLink} />
       </>

@@ -7,6 +7,8 @@ import { onGetNotes } from "../firebase/firebase"
 //import {getFirestore} from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import Note from './Note.js'
+import "./Home.css"
+//import sweet from "../src/components/Img/sweet.png"
 
 const Lista = () => {
   const [modal, setModal] = useState(false);
@@ -34,12 +36,6 @@ const Lista = () => {
   }
   
   useEffect(() => {
-    
-    /* let arr = localStorage.getItem("notelist") 
-    if(arr){
-      let obj = JSON.parse(arr)
-      setNoteList(obj)
-    } */
     showNotes(); 
   }, []) 
 
@@ -76,7 +72,7 @@ const Lista = () => {
       <>
         <div className = "header text-center">
             <h3>Sweet Note</h3>
-            <button className = "btn btn-primary mt-2" onClick={() => setModal(true)}>Create List</button>
+            <button className = "loginButton" onClick={() => setModal(true)}>Create List</button>
         </div>
         <div className = "task-container">
           {noteList && noteList.map((obj, index) => <Note key = {obj.id} id = {obj.id} listObj = {obj} index = {index} deleteList = {deleteList} updateListArray = {updateListArray}/>)}

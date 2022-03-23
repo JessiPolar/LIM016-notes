@@ -18,13 +18,6 @@ const EditList = ({id, modal, toggle, listObj, updateList}) => {
         setListName({...listName, [name]: value})    
     }
 
-    /* const handleUpdate = (e) => {
-        e.preventDefault();
-        let tempObj = {}
-        tempObj['Name'] = listName
-        tempObj['Description'] = description
-        updateList(tempObj)
-    }   */
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,7 +39,7 @@ const EditList = ({id, modal, toggle, listObj, updateList}) => {
             
                 
                     <div className="form-group">
-                        <label>List Name</label>
+                        <label>Title </label>
                         <input type="text" className = "form-control"  value = {listName.name}   
                         onChange = {handleChange} name = "name"/>
                     </div>

@@ -5,47 +5,27 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const CreateList = ({addOrEditLink, modal, toggle, save} ) => {
     
-
     const state = {
         name: '',
         description: '',
       };
+      
     const [listName, setListName] = useState(state);
-    const [description, setDescription] = useState(state); 
+    //const [description, setDescription] = useState(state); 
 
     
     const handleChange = (e) => {
-       
         const {name, value} = e.target;
-        /* const {description, value} = e.target; */
         setListName({...listName, [name]: value})
-        //setDescription({...description,[name]: value})
-        console.log(name, value);
-
-        /* if (name === "listName") {
-            setListName(value)
-        }else{
-            setDescription(value)
-        } */
+        //console.log(name, value);
     }
 
-    
-    
     const handleSubmit = (e) => {
         console.log('handleSubmit');
         e.preventDefault();
         
         addOrEditLink(listName);
     }
-
-    /* const handleSave = (e) => {
-        e.preventDefault();
-        let listObj = {}
-        listObj["Name"] = listName
-        listObj["Description"] = description
-        save(listObj)
-        console.log(listName);
-    } */
 
 
     return (

@@ -31,6 +31,7 @@ const Lista = () => {
     await addDoc(collection(db,'notes'), linkObject);
     //addDoc(collection(db, 'posts'), doc().set(linkObject));
     console.log('nueva tarea agregada')
+    //date: Date.now(),
     showNotes();
     setModal(false);
   }
@@ -75,7 +76,7 @@ const Lista = () => {
             <button className = "loginButton" onClick={() => setModal(true)}>Create List</button>
         </div>
         <div className = "task-container">
-          {noteList && noteList.map((obj, index) => <Note key = {obj.id} id = {obj.id} listObj = {obj} index = {index} deleteList = {deleteList} updateListArray = {updateListArray}/>)}
+          {noteList && noteList.map((obj, index) => <Note key = {obj.id} id = {obj.id} listObj = {obj} index = {index} deleteList = {deleteList} updateListArray = {updateListArray} date = {obj.date}/>)}
         </div>
         <CreateList toggle = {toggle} modal = {modal} save = {saveList}  addOrEditLink = {addOrEditLink} />
       </>

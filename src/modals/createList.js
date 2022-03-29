@@ -3,11 +3,14 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 // const useState = React.useState;
 
-const CreateList = ({addOrEditLink, modal, toggle, save} ) => {
-    
+const CreateList = ({addOrEditLink, modal, toggle} ) => {
+    //const date = new Date();
     const state = {
         name: '',
         description: '',
+        //color: '#F48687',
+        //date: date.toLocaleDateString(),
+        date: Date.now(),
       };
       
     const [listName, setListName] = useState(state);

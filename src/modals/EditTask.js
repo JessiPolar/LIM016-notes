@@ -3,11 +3,13 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 //import { db } from '../firebase/firebaseConfig';
 import { updateNote } from "../firebase/firebase"
 
-const EditList = ({id, modal, toggle, listObj, updateList}) => {
-
+const EditList = ({id, modal, toggle, listObj, description, date}) => {
+    //const date = new Date();
     const state = {
         name: '',
         description: '',
+        //date: date.toLocaleDateString(),
+        date: Date.now(),
     };
     const [listName, setListName] = useState(state);
     /* const [description, setDescription] = useState('state'); */ 
@@ -52,8 +54,17 @@ const EditList = ({id, modal, toggle, listObj, updateList}) => {
                 
             </ModalBody>
             <ModalFooter>
+            <p>{description && description.substr(0, 100) + "..."}</p>
+                    <small className="note-meta">
+                      {" "}
+                      {new Date(date).toLocaleDateString("en-GB", {
+                       hour: "2-digit",
+                       minute: "2-digit",
+                      })}
+                    </small>   
                 <Button color="primary" onClick={handleSubmit} >Update</Button> {' '}
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
+                
             </ModalFooter>
         </Modal>
         

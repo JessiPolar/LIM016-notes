@@ -38,44 +38,94 @@ const Signup = () => {
   }; 
   return (
     <>
-      <div className="p-4 box">
-        <h2 className="mb-3">Signup</h2>
-        {error && <Alert variant="danger">{error}</Alert>}
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicUsername">
-            <Form.Control 
-              type="text" 
-              placeholder="Username"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </Form.Group> 
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control 
-              type="email" 
-              placeholder="Email address"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
+    <div className="container c-custom">
+      <div className="row r-custom">
+        <div className="col p-4 box bg">
+          <h2 className="title-custom">Sweet Note</h2>  
+        </div>
+        <div className="col p-4 box">
+            <h2 className="mb-3 text-center login-custom">Signup</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formBasicUsername">
+                <Form.Control 
+                  type="text" 
+                  placeholder="Username"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </Form.Group> 
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control 
+                  type="email" 
+                  placeholder="Email address"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Control 
-              type="password" 
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control 
+                  type="password" 
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
 
-          <div className="d-grip gap-2">
-            <Button variant="primary" type="Submit">
-              Sign Up
-            </Button>
+              <div className="d-grip gap-2">
+                <Button variant="primary" type="Submit" className="btn-signup-custom">
+                  Sign Up
+                </Button>
+              </div>
+            </Form>
+            <div className="p-4 box mt-3 text-center">
+            Already have an account? <Link to="/" className="link-custom">Log In</Link> 
+            </div>
           </div>
-        </Form>
-      </div>
-      <div className="p-4 box mt-3 text-center">
-        Already have an account? <Link to="/">Log In</Link> 
-      </div>
+        </div>
+      </div> 
+    
     </>
+
+
+
+    // <>
+    //   <div className="p-4 box">
+    //     <h2 className="mb-3">Signup</h2>
+    //     {error && <Alert variant="danger">{error}</Alert>}
+    //     <Form onSubmit={handleSubmit}>
+    //       <Form.Group className="mb-3" controlId="formBasicUsername">
+    //         <Form.Control 
+    //           type="text" 
+    //           placeholder="Username"
+    //           onChange={(e) => setUsername(e.target.value)}
+    //         />
+    //       </Form.Group> 
+    //       <Form.Group className="mb-3" controlId="formBasicEmail">
+    //         <Form.Control 
+    //           type="email" 
+    //           placeholder="Email address"
+    //           onChange={(e) => setEmail(e.target.value)}
+    //         />
+    //       </Form.Group>
+
+    //       <Form.Group className="mb-3" controlId="formBasicPassword">
+    //         <Form.Control 
+    //           type="password" 
+    //           placeholder="Password"
+    //           onChange={(e) => setPassword(e.target.value)}
+    //         />
+    //       </Form.Group>
+
+    //       <div className="d-grip gap-2">
+    //         <Button variant="primary" type="Submit">
+    //           Sign Up
+    //         </Button>
+    //       </div>
+    //     </Form>
+    //   </div>
+    //   <div className="p-4 box mt-3 text-center">
+    //     Already have an account? <Link to="/">Log In</Link> 
+    //   </div>
+    // </>
   );
 };
 

@@ -20,3 +20,48 @@
   .loginButton:hover {
     color: #000;
   }
+ 
+  .busqueda {
+    text-align: center;
+    padding: 40px 30px;
+    max-width: 100% !important;
+  }
+
+  .inputBuscar{
+    width: 50% !important;
+  }
+
+  .containerInput{
+    align-items: end;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 25px;
+  }
+  
+  @media (max-width: 988px){
+    
+    .inputBuscar{
+      width: 100% !important;
+    }
+  
+    .busqueda{
+      padding: 40px 5px;
+    }
+  
+    
+    .containerInput{
+      padding-bottom: 15px;
+    }
+  
+  }
+
+  .btn-success {
+    color: white;
+    background-color: #6d4e78!important;
+    border-color: #6d4e78!important;
+  }
+
+  .btn-success:hover {
+    color: rgb(238, 227, 235);
+  }

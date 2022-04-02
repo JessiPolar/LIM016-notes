@@ -17,9 +17,9 @@ const CreateList = ({addOrEditLink, modal, toggle} ) => {
     //const [description, setDescription] = useState(state); 
 
     
-    const handleChange = (e) => {
+    const handleChange = (e) => {   //manejo el cambio
         const {name, value} = e.target;
-        setListName({...listName, [name]: value})
+        setListName({...listName, [name]: value})  //copio los valores, y actualizamos  el input con el nuevo valor 
         //console.log(name, value);
     }
 
@@ -27,7 +27,7 @@ const CreateList = ({addOrEditLink, modal, toggle} ) => {
         console.log('handleSubmit');
         e.preventDefault();
         
-        addOrEditLink(listName);
+        addOrEditLink(listName);  // guardando los datos
     }
 
 

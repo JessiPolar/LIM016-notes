@@ -1,0 +1,73 @@
+@mixin buttons() {
+    background-color: rgba(198, 126, 126, 0.707) !important;
+    color:white !important;
+    border-color: rgba(198, 126, 126, 0.707) !important;
+
+    &:hover{
+        background-color: rgba(214, 168, 168, 0.707)  !important;
+        border-color: rgba(219, 176, 176, 0.707)   !important;
+    }
+}
+
+html{
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}               
+
+body{
+    width: 75%;
+    //background-color: rgba(233, 204, 176, 0.557);
+    background-color: rgba(233, 204, 176, 0.557);
+    //background-image: url(https://www.maxpixel.net/static/photo/640/Paper-Flower-Background-Flowers-Texture-White-Paper-4794429.jpg);
+    //background-image: url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/pd155-background-gade-06_3.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=a0b09c8196e6c7f50d41f19ecc6b4949);
+    //background-image: url(https://media.istockphoto.com/photos/flowers-background-bouquet-of-beautiful-pink-roses-on-white-wooden-picture-id1080369510?k=20&m=1080369510&s=170667a&w=0&h=0migkl_lbqgXQ9fMYnylbT3SPMrft7El6-fOX2Fed-s=);
+    //background-image: url(https://i.pinimg.com/736x/e9/3c/43/e93c439dfe371945ae7f6f2222e51272.jpg);
+    background-size: cover;
+}
+
+
+.bg{
+    background-image: url(https://i.pinimg.com/474x/67/19/1f/67191f05611236aa9b14fd19352104a8.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-custom{
+    background-color: rgba(233, 204, 176, 0.421);
+    border: solid 4px rgba(198, 126, 126, 0.707);
+    padding-left: 0px;
+}
+
+.title-custom,
+.login-custom{
+    font-family: 'Great Vibes', cursive;
+    font-size: 40px;
+    letter-spacing: 3px;
+}
+
+.btn-signup-custom,
+.btn-login-custom{
+    @include buttons();
+ }
+
+.link-custom{
+    text-decoration: none;
+    color: rgb(181, 108, 108);
+
+    &:hover{
+        color: rgb(129, 76, 76);
+    }
+}
+
+.btn-login-google-custom{
+    border-radius: 3px !important;
+    @include buttons();
+    box-shadow: pink !important;
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap"

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
+import Sidebar from '../components/Sidebar/Sidebar';
 // const useState = React.useState;
 
 const CreateList = ({addOrEditLink, modal, toggle} ) => {
@@ -8,6 +8,8 @@ const CreateList = ({addOrEditLink, modal, toggle} ) => {
     const state = {
         name: '',
         description: '',
+        value: '',
+        label: '',
         //color: '#F48687',
         //date: date.toLocaleDateString(),
         date: Date.now(),
@@ -32,10 +34,13 @@ const CreateList = ({addOrEditLink, modal, toggle} ) => {
 
 
     return (
+        
         <Modal isOpen={modal} toggle={toggle}>
+            
             <ModalHeader toggle={toggle}>Create Note</ModalHeader>
+            <Sidebar />
             <ModalBody>
-                
+            
                     <div className="form-group">
                         <label>Title</label>
                         <input type="text" className = "form-control"  /* value = {listName} */  
@@ -52,7 +57,9 @@ const CreateList = ({addOrEditLink, modal, toggle} ) => {
             <ModalFooter>
                 <Button color="primary" onClick={handleSubmit} >Create</Button> {' '}
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
+                
             </ModalFooter>
+            
         </Modal>
     );
 };

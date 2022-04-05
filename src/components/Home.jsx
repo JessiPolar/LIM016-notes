@@ -8,9 +8,12 @@ import { onGetNotes } from "../firebase/firebase"
 import { collection, addDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { RiLogoutBoxRLine } from 'react-icons/ri';
 import Note from './Note.js'
 import "./Home.css"
-//import sweet from "../src/components/Img/sweet.png"
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 
 const Lista = () => {
   const [modal, setModal] = useState(false);
@@ -58,7 +61,18 @@ const Lista = () => {
   useEffect(() => {
     showNotes();  // se va a ejecutar cuando se cargue el componente
   }, [])
-  
+
+  const navigate=useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      navigate('/home');
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
   
   const deleteList = (index) => {
     let tempList = noteList
@@ -93,7 +107,12 @@ const Lista = () => {
       <>
         <div className = "header text-center">
             <h3>Sweet Note</h3>
-            <button className = "loginButton" onClick={() => setModal(true)}>Create List</button>
+            <div >
+              <button className = "loginButton" onClick={() => setModal(true)}>Create List</button>
+              <RiLogoutBoxRLine className = "cerrarSesion" onClick={handleSubmit}/> 
+            </div>
+            
+            
             <div className = "busqueda">
               <div className = "containerInput">
                 <input className="form-control inputBuscar"
@@ -109,8 +128,6 @@ const Lista = () => {
         </div>
         <div className = "task-container">  
           {noteList && noteList.map((obj, index) => <Note key = {obj.id} id = {obj.id} listObj = {obj} index = {index} deleteList = {deleteList} updateListArray = {updateListArray} date = {obj.date}/>)}
-        
-        
         </div>
         <CreateList toggle = {toggle} modal = {modal} save = {saveList}  addOrEditLink = {addOrEditLink} />
       </>

@@ -8,6 +8,8 @@ const EditList = ({id, modal, toggle, listObj, description, date}) => {
     const state = {
         name: '',
         description: '',
+        value: '',
+        label: '',
         //date: date.toLocaleDateString(),
         date: Date.now(),
     };

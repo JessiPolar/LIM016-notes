@@ -65,3 +65,9 @@
   .btn-success:hover {
     color: rgb(238, 227, 235);
   }
+
+  .cerrarSesion {
+    position: absolute;
+    right: 230px;
+    
+  }

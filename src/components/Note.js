@@ -1,36 +1,37 @@
 import React, {useState, useEffect} from 'react';
 import EditList from '../modals/EditTask.js';
 import { deleteNote } from "../firebase/firebase"
+
 /* import 'bootstrap/dist/css/bootstrap.min.css'
 import "react-bootstrap"; */
 
 const Note = ({id, listObj, index, deleteList, updateListArray, date, description}) => {
     const [modal, setModal] = useState(false);
-
+    
     const colors = [
-        {
-            primaryColor : "#F48687",
-            secondaryColor : "#FDF1F1"
-            
-        },
         { 
-            primaryColor : "#F9D288",
-            secondaryColor : "#FEFAF1" 
+                primaryColor : "#F48687",
+                secondaryColor : "#FDF1F1"  
         },
-        {   primaryColor : "#B964F7",
-            secondaryColor : "#F3F0FD"
-           
-        },
-        {
-            primaryColor : "#5DC250",
-            secondaryColor : "#F2FAF1" 
             
+        {   
+                primaryColor : "#F9D288",
+                secondaryColor : "#FEFAF1"
         },
-         {   primaryColor : "#5D93E1",
-             secondaryColor : "ECF3FC"        
-        }, 
+             
+        {  
+                primaryColor : "#B964F7",
+                secondaryColor : "#F3F0FD"
+        },
+            
+        {   
+                primaryColor : "#5DC250",
+                secondaryColor : "#F2FAF1"
+        },
        
     ]
+
+    
 
     const toggle = () => {
         setModal(!modal);  
@@ -48,13 +49,15 @@ const Note = ({id, listObj, index, deleteList, updateListArray, date, descriptio
             deleteNote(id);
         }
     }
+    
+    
 
     useEffect(() => {
-         
+          
       }, []) 
       
     return (
-        <>
+        <>  
             <div className = "card-wrapper mr-5">
                 <div className = "card-top" style={{"backgroundColor": colors[index%4].primaryColor}}></div>
                 <div className = "task-holder">

@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import CreateList from '../modals/createList.js';
 import { db } from "../firebase/firebaseConfig";
-import { onGetNotes } from "../firebase/firebase"
+import { onGetNotes, getNotesOnce } from "../firebase/firebase"
 //import {getFirestore, collection, doc, set } from "firebase/firestore";
 //import {getFirestore} from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
@@ -20,32 +20,24 @@ const Lista = () => {
   const [noteList, setNoteList] = useState([]); 
   const [busqueda, setBusqueda] = useState("");
 
-  const getNotes = () => {
-    return new Promise(function(resolve, reject) {
-      onGetNotes((notes) => {    // obtengo mis notas
-        const uid = sessionStorage.getItem("uid")  
-        const newNotes = [];
-        notes.forEach((note) => {   // Recorro nota por nota
-          const newNote = note.data();  // guardo en una variable el valor de los campos
-          newNote['id'] = note.id;   // le agrego el id que obtengo del firebase a la variable
-          if(uid === newNote.uid) {
-            newNotes.push(newNote);   // le agrego al array newNotes la newNote
-          }  
-        })
-        console.log("newNotes = ", newNotes);
-        resolve(newNotes);
-        
-      })
-    })
-    
-  }
+  
 
-  const showNotes = async () => {
-         
-    getNotes()
-    .then((notes) => {
-      setNoteList(notes);   // a la variable noteList le asigno el valor de la variable newNotes
-    })
+  const showNotes = () => {
+    onGetNotes((notes) => {    // obtengo mis notas
+      const uid = sessionStorage.getItem("uid")  
+      const newNotes = [];
+      notes.forEach((note) => {   // Recorro nota por nota
+        const newNote = note.data();  // guardo en una variable el valor de los campos
+        newNote['id'] = note.id;   // le agrego el id que obtengo del firebase a la variable
+        if(uid === newNote.uid) {
+          newNotes.push(newNote);   // le agrego al array newNotes la newNote
+        }  
+      })
+      console.log("newNotes = ", newNotes);
+      setNoteList(newNotes);   // a la variable noteList le asigno el valor de la variable newNotes
+      
+    })     
+    
   }
 
   const addOrEditLink = async (linkObject) => {
@@ -63,17 +55,26 @@ const Lista = () => {
     filtrarBusqueda(e.target.value)
   }
 
-  const filtrarBusqueda = (buscar) => {
-    getNotes()
-    .then((notes) => {
-      const resultadoBusqueda = notes.filter((elemento) => {
-        if(elemento.name.toString().toLowerCase().includes(buscar.toLowerCase())){  // convertimos a string, despues a minuscula y comprobar si coincide con el termino de busqueda(lo convertimos a minuscula)
-          return true;                                                          // si coincide retorna el elemento, 
-        }
-        return false;
-      });
-      setNoteList(resultadoBusqueda);
+  const filtrarBusqueda = async (buscar) => {
+    const allNotes = await getNotesOnce();
+    const notes = [];
+    const uid = sessionStorage.getItem("uid")
+    console.log("uid = ", uid)
+    allNotes.forEach((note) => {
+      console.log("note= ", note.data())
+      if(note.data().uid === uid) {
+        notes.push(note.data());
+      }
+      
     })
+    console.log("notes = ", notes)
+    const resultadoBusqueda = notes.filter((elemento) => {
+      if(elemento.name.toString().toLowerCase().includes(buscar.toLowerCase())){  // convertimos a string, despues a minuscula y comprobar si coincide con el termino de busqueda(lo convertimos a minuscula)
+        return true;                                                          // si coincide retorna el elemento, 
+      }
+      return false;
+    });
+    setNoteList(resultadoBusqueda);
     
   }
   

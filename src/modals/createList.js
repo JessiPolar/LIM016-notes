@@ -10,6 +10,8 @@ const CreateList = ({addOrEditLink, modal, toggle} ) => {
         description: '',
         value: '',
         label: '',
+        uid: sessionStorage.getItem("uid"),
+        /* creator: sessionStorage.getItem("myid") */
         //color: '#F48687',
         //date: date.toLocaleDateString(),
         date: Date.now(),

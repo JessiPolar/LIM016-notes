@@ -15,10 +15,10 @@ function Sidebar(Note) {
       <ul className={`sidebar_list ${listColors ? "sidebar_list_active" : ""}`}>
         {colors.map((item, index) => (
           <li
-            key={index}
+            /* key={index} */
             className="sidebar_list_item"
             style={{ backgroundColor: item }}
-            onClick={() => Note(item)}
+            /* onClick={() => Note(item)} */
           />
         ))}
       </ul>

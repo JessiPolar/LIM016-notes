@@ -20,16 +20,31 @@ const Lista = () => {
   const [noteList, setNoteList] = useState([]); 
   const [busqueda, setBusqueda] = useState("");
 
-  const showNotes = () => {
-    onGetNotes((notes) => {    // obtengo mis notas
-      const newNotes = [];
-      notes.forEach((note) => {   // Recorro nota por nota
-        const newNote = note.data();  // guardo en una variable el valor de los campos
-        newNote['id'] = note.id;   // le agrego el id que obtengo del firebase a la variable
-        newNotes.push(newNote);   // le agrego al array newNotes la newNote
+  const getNotes = () => {
+    return new Promise(function(resolve, reject) {
+      onGetNotes((notes) => {    // obtengo mis notas
+        const uid = sessionStorage.getItem("uid")  
+        const newNotes = [];
+        notes.forEach((note) => {   // Recorro nota por nota
+          const newNote = note.data();  // guardo en una variable el valor de los campos
+          newNote['id'] = note.id;   // le agrego el id que obtengo del firebase a la variable
+          if(uid === newNote.uid) {
+            newNotes.push(newNote);   // le agrego al array newNotes la newNote
+          }  
+        })
+        console.log("newNotes = ", newNotes);
+        resolve(newNotes);
+        
       })
-      console.log("newNotes = ", newNotes);
-      setNoteList(newNotes);     // a la variable noteList le asigno el valor de la variable newNotes
+    })
+    
+  }
+
+  const showNotes = async () => {
+         
+    getNotes()
+    .then((notes) => {
+      setNoteList(notes);   // a la variable noteList le asigno el valor de la variable newNotes
     })
   }
 
@@ -49,13 +64,17 @@ const Lista = () => {
   }
 
   const filtrarBusqueda = (buscar) => {
-    const resultadoBusqueda = noteList.filter((elemento) => {
-      console.log("Este es notelist: " + noteList)
-      if(elemento.name.toString().toLowerCase().includes(buscar.toLowerCase())){  // convertimos a string, despues a minuscula y comprobar si coincide con el termino de busqueda(lo convertimos a minuscula)
-        return elemento;                                                          // si coincide retorna el elemento, 
-      }
-    });
-    setNoteList(resultadoBusqueda);
+    getNotes()
+    .then((notes) => {
+      const resultadoBusqueda = notes.filter((elemento) => {
+        if(elemento.name.toString().toLowerCase().includes(buscar.toLowerCase())){  // convertimos a string, despues a minuscula y comprobar si coincide con el termino de busqueda(lo convertimos a minuscula)
+          return true;                                                          // si coincide retorna el elemento, 
+        }
+        return false;
+      });
+      setNoteList(resultadoBusqueda);
+    })
+    
   }
   
   useEffect(() => {

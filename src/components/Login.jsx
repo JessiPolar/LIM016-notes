@@ -13,12 +13,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    try {
-      await logIn(email, password);
-      navigate("/home");
-    } catch (err) {
-      setError(err.message);
-    }
+    logIn(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        sessionStorage.setItem("uid", user.uid)
+        navigate("/home");
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
   };
 
   const handleGoogleSignIn = async (e) => {
